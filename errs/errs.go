@@ -1,6 +1,8 @@
 package errs
 
 import (
+	"net/http"
+
 	"github.com/pkg/errors"
 )
 
@@ -14,6 +16,23 @@ const (
 	Conflict
 	Failed
 )
+
+func StatusCode(err error) int {
+	switch GetType(err) {
+	case Invalidated:
+		return http.StatusBadRequest
+	case Forbidden:
+		return http.StatusForbidden
+	case NotFound:
+		return http.StatusNotFound
+	case Conflict:
+		return http.StatusConflict
+	case Failed:
+		return http.StatusInternalServerError
+	default:
+		return http.StatusBadRequest
+	}
+}
 
 type typeGetter interface {
 	Type() ErrorType
