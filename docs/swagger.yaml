@@ -1,0 +1,37 @@
+host: 192.168.50.10:8080
+info:
+  contact: {}
+  description: This is a personal project
+  license:
+    name: takaaki12353491
+  title: Service API
+  version: "1.0"
+paths:
+  /signup:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: name
+        in: formData
+        name: name
+        required: true
+        type: string
+      - description: email
+        in: formData
+        name: email
+        required: true
+        type: string
+      - description: password
+        in: formData
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200": {}
+        "400": {}
+      tags:
+      - User
+swagger: "2.0"
