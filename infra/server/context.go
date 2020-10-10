@@ -13,3 +13,7 @@ type Context struct {
 func (c *Context) CTX() context.Context {
 	return c.Context.Request().Context()
 }
+
+func (c Context) UserID() string {
+	return c.Get(userIDKey).(string)
+}

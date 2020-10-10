@@ -25,7 +25,7 @@ func Start() {
 	userController := controller.NewUserController()
 
 	eg := e.EchoGroup("")
-	eg.POST("/signup", userController.SignUp)
+	eg.POST("/signup", userController.SignUp, logout)
 
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 	// Start server
