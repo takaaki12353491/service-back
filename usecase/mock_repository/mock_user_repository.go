@@ -5,9 +5,9 @@
 package mock_repository
 
 import (
-	model "cln-arch/domain/model"
 	gomock "github.com/golang/mock/gomock"
 	reflect "reflect"
+	model "service-back/domain/model"
 )
 
 // MockUserRepository is a mock of UserRepository interface
