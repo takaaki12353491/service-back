@@ -1,9 +1,12 @@
 package interactor
 
 import (
+	"service-back/domain/model"
 	inputdata "service-back/usecase/input/data"
 	outputport "service-back/usecase/output/port"
 	"service-back/usecase/repository"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type UserInteractor struct {
@@ -21,6 +24,16 @@ func NewUserInteractor(
 	}
 }
 
-func (it *UserInteractor) SignUp(user *inputdata.User) {
-
+func (it *UserInteractor) SignUp(iUser *inputdata.User) error {
+	user, err := model.NewUser(iUser.Name, iUser.Email, iUser.Password)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+	err = it.userRepository.Store(user)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+	return nil
 }

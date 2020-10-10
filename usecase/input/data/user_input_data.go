@@ -1,7 +1,7 @@
 package inputdata
 
 type User struct {
-	Name     string
-	Email    string
-	Password string
+	Name     string `validate:"required"`
+	Email    string `validate:"required,email"`
+	Password string `validate:"required"`
 }
