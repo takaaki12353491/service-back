@@ -12,8 +12,8 @@ type UserInteractor struct {
 }
 
 func NewUserInteractor(
-	userRepository repository.UserRepository,
 	outputport outputport.UserOutputPort,
+	userRepository repository.UserRepository,
 ) *UserInteractor {
 	return &UserInteractor{
 		userRepository: userRepository,
