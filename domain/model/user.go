@@ -1,11 +1,12 @@
 package model
 
 import (
+	"os"
 	"service-back/validator"
 
 	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
-	"github.com/labstack/gommon/log"
+	log "github.com/sirupsen/logrus"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -31,4 +32,9 @@ func NewUser(name string, email string, password string) (*User, error) {
 		return nil, err
 	}
 	return user, nil
+}
+
+func (user *User) IsValidPassword(password string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(user.PasswordDigest), []byte(password+os.Getenv("WS_PASSWORD_SALT")))
+	return err == nil
 }

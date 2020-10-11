@@ -2,6 +2,7 @@ package controller
 
 import (
 	"net/http"
+	"service-back/errs"
 	"service-back/interface/database"
 	"service-back/interface/presenter"
 	inputdata "service-back/usecase/input/data"
@@ -35,7 +36,7 @@ func NewUserController() *UserController {
 	}
 }
 
-// SignUp ...
+// Signup ...
 // @summary
 // @description
 // @tags User
@@ -67,4 +68,30 @@ func (ctrl *UserController) Signup(c Context) error {
 		return err
 	}
 	return c.JSON(http.StatusOK, nil)
+}
+
+// Login ...
+// @summary Login
+// @description Generate cookie for login discrimination if email and password match DB. Otherwise redirect to sign in page.
+// @tags UserAuth
+// @accept mpfd
+// @produce json
+// @param name formData string true "name"
+// @param password formData string true "password"
+// @success 200 {object} outputdata.Login ""
+// @failure 409 {string} string ""
+// @router /login [post]
+func (ctrl *UserController) Login(c Context) error {
+	name := c.FormValue(ctrl.param.Name)
+	password := c.FormValue(ctrl.param.Password)
+	iSignIn := &inputdata.Login{
+		Name:     name,
+		Password: password,
+	}
+	oLogin, err := ctrl.inputport.Login(iSignIn)
+	if err != nil {
+		c.String(errs.StatusCode(err), errs.Cause(err).Error())
+		return err
+	}
+	return c.JSON(http.StatusOK, oLogin)
 }

@@ -25,6 +25,16 @@ func (db *UserDatabase) FindByID(id uint) (*model.User, error) {
 	return user, nil
 }
 
+func (db *UserDatabase) FindByName(name string) (*model.User, error) {
+	user := new(model.User)
+	user.Name = name
+	if err := db.First(user).Error; err != nil {
+		log.Error(err)
+		return nil, err
+	}
+	return user, nil
+}
+
 func (db *UserDatabase) Store(user *model.User) error {
 	if err := db.Create(user).Error; err != nil {
 		log.Error(err)

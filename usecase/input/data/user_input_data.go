@@ -5,3 +5,8 @@ type User struct {
 	Email    string `validate:"required,email"`
 	Password string `validate:"required"`
 }
+
+type Login struct {
+	Name     string
+	Password string
+}
