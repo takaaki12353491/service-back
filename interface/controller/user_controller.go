@@ -47,7 +47,7 @@ func NewUserController() *UserController {
 // @success 200
 // @failure 400
 // @router /signup [post]
-func (ctrl *UserController) SignUp(c Context) error {
+func (ctrl *UserController) Signup(c Context) error {
 	name := c.FormValue(ctrl.param.Name)
 	email := c.FormValue(ctrl.param.Email)
 	password := c.FormValue(ctrl.param.Password)
@@ -61,7 +61,7 @@ func (ctrl *UserController) SignUp(c Context) error {
 		log.Error(err)
 		return err
 	}
-	err = ctrl.inputport.SignUp(iUser)
+	err = ctrl.inputport.Signup(iUser)
 	if err != nil {
 		log.Error(err)
 		return err

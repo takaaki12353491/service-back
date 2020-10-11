@@ -24,7 +24,7 @@ func NewUserInteractor(
 	}
 }
 
-func (it *UserInteractor) SignUp(iUser *inputdata.User) error {
+func (it *UserInteractor) Signup(iUser *inputdata.User) error {
 	user, err := model.NewUser(iUser.Name, iUser.Email, iUser.Password)
 	if err != nil {
 		log.Error(err)
