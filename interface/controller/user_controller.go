@@ -60,11 +60,13 @@ func (ctrl *UserController) Signup(c Context) error {
 	err := validator.Validate(iUser)
 	if err != nil {
 		log.Error(err)
+		c.String(errs.StatusCode(err), errs.Cause(err).Error())
 		return err
 	}
 	err = ctrl.inputport.Signup(iUser)
 	if err != nil {
 		log.Error(err)
+		c.String(errs.StatusCode(err), errs.Cause(err).Error())
 		return err
 	}
 	return c.JSON(http.StatusOK, nil)
@@ -90,6 +92,7 @@ func (ctrl *UserController) Login(c Context) error {
 	}
 	oLogin, err := ctrl.inputport.Login(iSignIn)
 	if err != nil {
+		log.Error(err)
 		c.String(errs.StatusCode(err), errs.Cause(err).Error())
 		return err
 	}
