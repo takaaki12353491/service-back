@@ -2,6 +2,7 @@ package model
 
 import (
 	"os"
+	"service-back/consts"
 	"service-back/validator"
 
 	"github.com/google/uuid"
@@ -19,7 +20,7 @@ type User struct {
 
 func NewUser(name string, email string, password string) (*User, error) {
 	id := uint(uuid.New().ID())
-	passwordDigest, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	passwordDigest, _ := bcrypt.GenerateFromPassword([]byte(password+os.Getenv(consts.PASSWORD_SALT)), bcrypt.DefaultCost)
 	user := &User{
 		Model:          gorm.Model{ID: id},
 		Name:           name,
@@ -35,6 +36,6 @@ func NewUser(name string, email string, password string) (*User, error) {
 }
 
 func (user *User) IsValidPassword(password string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(user.PasswordDigest), []byte(password+os.Getenv("WS_PASSWORD_SALT")))
+	err := bcrypt.CompareHashAndPassword([]byte(user.PasswordDigest), []byte(password+os.Getenv(os.Getenv(consts.PASSWORD_SALT))))
 	return err == nil
 }

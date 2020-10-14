@@ -1,5 +1,6 @@
 package consts
 
 const (
-	SIGNINKEY = "SIGNINKEY"
+	SIGNIN_KEY    = "SIGNIN_KEY"
+	PASSWORD_SALT = "PASSWORD_SALT"
 )
