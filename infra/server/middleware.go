@@ -3,6 +3,8 @@ package server
 import (
 	"fmt"
 	"net/http"
+	"os"
+	"service-back/consts"
 	"service-back/errs"
 
 	"github.com/dgrijalva/jwt-go"
@@ -24,7 +26,7 @@ func login(next echo.HandlerFunc) echo.HandlerFunc {
 			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 				return "", fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 			}
-			return []byte("secret"), nil
+			return []byte(os.Getenv(consts.SIGNINKEY)), nil
 		})
 		if err != nil {
 			log.Error(err)

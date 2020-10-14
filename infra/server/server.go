@@ -1,9 +1,11 @@
 package server
 
 import (
+	"log"
 	"service-back/interface/controller"
 	"strings"
 
+	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
@@ -15,6 +17,10 @@ func Start() {
 	e.Use(
 		middleware.LoggerWithConfig(middleware.LoggerConfig{
 			Format: logFormat(),
+		}),
+		middleware.BodyDump(func(c echo.Context, reqBody, resBody []byte) {
+			log.Printf("Request Body: %v\n", string(reqBody))
+			log.Printf("Response Body: %v\n", string(resBody))
 		}),
 		middleware.CORS(),
 		middleware.Recover(),
