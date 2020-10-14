@@ -7,6 +7,6 @@ type User struct {
 }
 
 type Login struct {
-	Name     string
+	Identity string
 	Password string
 }

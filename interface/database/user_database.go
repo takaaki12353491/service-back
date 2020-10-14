@@ -15,20 +15,21 @@ func NewUserDatabase() *UserDatabase {
 	return &UserDatabase{NewConnection()}
 }
 
-func (db *UserDatabase) FindByID(id uint) (*model.User, error) {
+func (db *UserDatabase) FindByNameOrEmail(name, email string) (*model.User, error) {
 	user := new(model.User)
-	user.ID = id
-	if err := db.First(user).Error; err != nil {
+	err := db.Where("name = ? OR email ?", name, email).First(user).Error
+	if err != nil {
 		log.Error(err)
 		return nil, err
 	}
 	return user, nil
 }
 
-func (db *UserDatabase) FindByName(name string) (*model.User, error) {
+func (db *UserDatabase) FindByID(id string) (*model.User, error) {
 	user := new(model.User)
-	user.Name = name
-	if err := db.First(user).Error; err != nil {
+	user.ID = id
+	err := db.First(user).Error
+	if err != nil {
 		log.Error(err)
 		return nil, err
 	}
@@ -36,7 +37,8 @@ func (db *UserDatabase) FindByName(name string) (*model.User, error) {
 }
 
 func (db *UserDatabase) Store(user *model.User) error {
-	if err := db.Create(user).Error; err != nil {
+	err := db.Create(user).Error
+	if err != nil {
 		log.Error(err)
 		return err
 	}
@@ -44,7 +46,8 @@ func (db *UserDatabase) Store(user *model.User) error {
 }
 
 func (db *UserDatabase) Update(user *model.User) error {
-	if err := db.Save(user).Error; err != nil {
+	err := db.Save(user).Error
+	if err != nil {
 		log.Error(err)
 		return err
 	}
