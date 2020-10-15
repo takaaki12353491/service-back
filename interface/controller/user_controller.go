@@ -68,7 +68,7 @@ func (ctrl *UserController) Signup(c Context) error {
 // @tags UserAuth
 // @accept mpfd
 // @produce json
-// @param name formData string true "name"
+// @param identity formData string true "identity"
 // @param password formData string true "password"
 // @success 200 {object} outputdata.Login ""
 // @failure 409 {string} string ""
