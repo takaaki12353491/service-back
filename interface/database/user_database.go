@@ -17,7 +17,7 @@ func NewUserDatabase() *UserDatabase {
 
 func (db *UserDatabase) FindByNameOrEmail(name, email string) (*model.User, error) {
 	user := new(model.User)
-	err := db.Where("name = ? OR email ?", name, email).First(user).Error
+	err := db.Where("name = ? OR email = ?", name, email).First(user).Error
 	if err != nil {
 		log.Error(err)
 		return nil, err
