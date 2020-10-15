@@ -28,7 +28,7 @@ func NewUserInteractor(
 
 func (it *UserInteractor) Signup(iUser *inputdata.User) error {
 	user, _ := it.userRepository.FindByNameOrEmail(iUser.Name, iUser.Email)
-	if user == nil {
+	if user != nil {
 		errMsg := "The name or email already exists"
 		log.Error(errMsg)
 		return errs.Conflict.New(errMsg)
