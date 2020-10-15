@@ -13,26 +13,16 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-type userParam struct {
-	Name     string
-	Email    string
-	Password string
-}
-
 type UserController struct {
 	inputport inputport.UserInputPort
-	param     *userParam
 }
 
 func NewUserController() *UserController {
-	param := &userParam{}
-	initializeParam(param)
 	return &UserController{
 		inputport: interactor.NewUserInteractor(
 			presenter.NewUserPresenter(),
 			database.NewUserDatabase(),
 		),
-		param: param,
 	}
 }
 
@@ -49,9 +39,9 @@ func NewUserController() *UserController {
 // @failure 400
 // @router /signup [post]
 func (ctrl *UserController) Signup(c Context) error {
-	name := c.FormValue(ctrl.param.Name)
-	email := c.FormValue(ctrl.param.Email)
-	password := c.FormValue(ctrl.param.Password)
+	name := c.FormValue(pn.Name)
+	email := c.FormValue(pn.Email)
+	password := c.FormValue(pn.Password)
 	iUser := &inputdata.User{
 		Name:     name,
 		Email:    email,
@@ -84,13 +74,13 @@ func (ctrl *UserController) Signup(c Context) error {
 // @failure 409 {string} string ""
 // @router /login [post]
 func (ctrl *UserController) Login(c Context) error {
-	name := c.FormValue(ctrl.param.Name)
-	password := c.FormValue(ctrl.param.Password)
-	iSignIn := &inputdata.Login{
-		Name:     name,
+	identity := c.FormValue(pn.Identity)
+	password := c.FormValue(pn.Password)
+	iLogin := &inputdata.Login{
+		Identity: identity,
 		Password: password,
 	}
-	oLogin, err := ctrl.inputport.Login(iSignIn)
+	oLogin, err := ctrl.inputport.Login(iLogin)
 	if err != nil {
 		log.Error(err)
 		c.String(errs.StatusCode(err), errs.Cause(err).Error())
