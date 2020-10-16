@@ -23,8 +23,8 @@ func (p *UserPresenter) Login(user *model.User) *outputdata.Login {
 	claims["sub"] = user.ID
 	claims["exp"] = time.Now().AddDate(0, 0, 7).Unix()
 	claims["iat"] = time.Now().Unix()
-	t, _ := jwtToken.SignedString(os.Getenv(consts.SIGNIN_KEY))
+	t, _ := jwtToken.SignedString([]byte(os.Getenv(consts.SIGNIN_KEY)))
 	return &outputdata.Login{
-		JwtToken: t,
+		JWT: t,
 	}
 }

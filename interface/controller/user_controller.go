@@ -27,7 +27,7 @@ func NewUserController() *UserController {
 }
 
 // Signup ...
-// @summary
+// @summary Signup
 // @description
 // @tags User
 // @accept mpfd
@@ -64,7 +64,7 @@ func (ctrl *UserController) Signup(c Context) error {
 
 // Login ...
 // @summary Login
-// @description Generate cookie for login discrimination if email and password match DB. Otherwise redirect to sign in page.
+// @description
 // @tags UserAuth
 // @accept mpfd
 // @produce json
