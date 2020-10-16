@@ -29,7 +29,6 @@ var doc = `{
     "paths": {
         "/login": {
             "post": {
-                "description": "Generate cookie for login discrimination if email and password match DB. Otherwise redirect to sign in page.",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -83,6 +82,7 @@ var doc = `{
                 "tags": [
                     "User"
                 ],
+                "summary": "Signup",
                 "parameters": [
                     {
                         "type": "string",
@@ -117,7 +117,7 @@ var doc = `{
         "outputdata.Login": {
             "type": "object",
             "properties": {
-                "jwtToken": {
+                "jwt": {
                     "type": "string"
                 }
             }

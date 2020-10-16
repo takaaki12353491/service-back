@@ -1,7 +1,7 @@
 definitions:
   outputdata.Login:
     properties:
-      jwtToken:
+      jwt:
         type: string
     type: object
 host: 192.168.50.10:8080
@@ -17,7 +17,6 @@ paths:
     post:
       consumes:
       - multipart/form-data
-      description: Generate cookie for login discrimination if email and password match DB. Otherwise redirect to sign in page.
       parameters:
       - description: identity
         in: formData
@@ -68,6 +67,7 @@ paths:
       responses:
         "200": {}
         "400": {}
+      summary: Signup
       tags:
       - User
 swagger: "2.0"
