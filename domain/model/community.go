@@ -9,6 +9,7 @@ import (
 
 type Community struct {
 	Model
+	OwnerID     string
 	Owner       User   `validate:"required"`
 	Name        string `validate:"required"`
 	Description string
@@ -19,6 +20,7 @@ func NewCommunity(owner *User, name, description string) (*Community, error) {
 	id := uuid.New().String()
 	community := &Community{
 		Model:       Model{ID: id},
+		OwnerID:     owner.ID,
 		Owner:       *owner,
 		Name:        name,
 		Description: description,
