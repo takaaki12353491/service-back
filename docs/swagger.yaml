@@ -1,4 +1,16 @@
 definitions:
+  outputdata.Community:
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      owner:
+        $ref: '#/definitions/outputdata.User'
+        type: object
+    type: object
   outputdata.Login:
     properties:
       jwt:
@@ -25,6 +37,39 @@ info:
   title: Service API
   version: "1.0"
 paths:
+  /communities:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: name
+        in: formData
+        name: name
+        required: true
+        type: string
+      - description: description
+        in: formData
+        name: description
+        required: true
+        type: string
+      - description: password
+        in: formData
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/outputdata.Community'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      tags:
+      - Community
   /login:
     post:
       consumes:
@@ -53,7 +98,7 @@ paths:
             type: string
       summary: Login
       tags:
-      - UserAuth
+      - Auth
   /signup:
     post:
       consumes:
@@ -79,7 +124,6 @@ paths:
       responses:
         "200": {}
         "400": {}
-      summary: Signup
       tags:
-      - User
+      - Auth
 swagger: "2.0"

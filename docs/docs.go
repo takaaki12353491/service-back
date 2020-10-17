@@ -27,6 +27,56 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/communities": {
+            "post": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Community"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "description",
+                        "name": "description",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "password",
+                        "name": "password",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/outputdata.Community"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/login": {
             "post": {
                 "consumes": [
@@ -36,7 +86,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "UserAuth"
+                    "Auth"
                 ],
                 "summary": "Login",
                 "parameters": [
@@ -80,9 +130,8 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User"
+                    "Auth"
                 ],
-                "summary": "Signup",
                 "parameters": [
                     {
                         "type": "string",
@@ -114,6 +163,24 @@ var doc = `{
         }
     },
     "definitions": {
+        "outputdata.Community": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "owner": {
+                    "type": "object",
+                    "$ref": "#/definitions/outputdata.User"
+                }
+            }
+        },
         "outputdata.Login": {
             "type": "object",
             "properties": {

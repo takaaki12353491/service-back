@@ -36,9 +36,9 @@ func NewCommunityController() *CommunityController {
 // @param name formData string true "name"
 // @param description formData string true "description"
 // @param password formData string true "password"
-// @success 200
-// @failure 400
-// @router /signup [post]
+// @success 200 {object} outputdata.Community ""
+// @failure 400 {string} string ""
+// @router /communities [post]
 func (ctrl *CommunityController) Create(c Context) error {
 	userID := c.UserID()
 	name := c.FormValue(pn.Name)

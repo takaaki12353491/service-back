@@ -27,9 +27,9 @@ func NewUserController() *UserController {
 }
 
 // Signup ...
-// @summary Signup
+// @summary
 // @description
-// @tags User
+// @tags Auth
 // @accept mpfd
 // @produce json
 // @param name formData string true "name"
@@ -50,13 +50,13 @@ func (ctrl *UserController) Signup(c Context) error {
 	err := validator.Validate(iUser)
 	if err != nil {
 		log.Error(err)
-		c.String(errs.StatusCode(err), errs.Cause(err).Error())
+		c.JSON(errs.StatusCode(err), errs.Cause(err).Error())
 		return err
 	}
 	err = ctrl.inputport.Signup(iUser)
 	if err != nil {
 		log.Error(err)
-		c.String(errs.StatusCode(err), errs.Cause(err).Error())
+		c.JSON(errs.StatusCode(err), errs.Cause(err).Error())
 		return err
 	}
 	return c.JSON(http.StatusOK, nil)
@@ -65,7 +65,7 @@ func (ctrl *UserController) Signup(c Context) error {
 // Login ...
 // @summary Login
 // @description
-// @tags UserAuth
+// @tags Auth
 // @accept mpfd
 // @produce json
 // @param identity formData string true "identity"
@@ -83,7 +83,7 @@ func (ctrl *UserController) Login(c Context) error {
 	oLogin, err := ctrl.inputport.Login(iLogin)
 	if err != nil {
 		log.Error(err)
-		c.String(errs.StatusCode(err), errs.Cause(err).Error())
+		c.JSON(errs.StatusCode(err), errs.Cause(err).Error())
 		return err
 	}
 	return c.JSON(http.StatusOK, oLogin)
