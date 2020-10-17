@@ -6,5 +6,6 @@ import (
 )
 
 type CommunityInputPort interface {
+	Index() ([]outputdata.Community, error)
 	Create(*inputdata.Community) (*outputdata.Community, error)
 }

@@ -28,6 +28,15 @@ func NewCommunityInteractor(
 	}
 }
 
+func (it *CommunityInteractor) Index() ([]outputdata.Community, error) {
+	communities, err := it.communityRepository.FindAll()
+	if err != nil {
+		log.Error(err)
+		return nil, err
+	}
+	return it.outputport.Index(communities), nil
+}
+
 func (it *CommunityInteractor) Create(iCommunity *inputdata.Community) (*outputdata.Community, error) {
 	user, err := it.userRepository.FindByID(iCommunity.UserID)
 	if err != nil {
