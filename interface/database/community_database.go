@@ -15,6 +15,16 @@ func NewCommunityDatabase() *CommunityDatabase {
 	return &CommunityDatabase{NewConnection()}
 }
 
+func (db *CommunityDatabase) FindAll() ([]model.Community, error) {
+	communities := []model.Community{}
+	err := db.Find(&communities).Error
+	if err != nil {
+		log.Error(err)
+		return nil, err
+	}
+	return communities, nil
+}
+
 func (db *CommunityDatabase) Store(community *model.Community) error {
 	err := db.Create(community).Error
 	if err != nil {

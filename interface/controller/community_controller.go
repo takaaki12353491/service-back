@@ -27,6 +27,25 @@ func NewCommunityController() *CommunityController {
 	}
 }
 
+// Index ...
+// @summary
+// @description
+// @tags Community
+// @accept json
+// @produce json
+// @success 200 {array} outputdata.Community ""
+// @failure 400 {string} string ""
+// @router /communities [get]
+func (ctrl *CommunityController) Index(c Context) error {
+	oCommunities, err := ctrl.inputport.Index()
+	if err != nil {
+		log.Error(err)
+		c.JSON(errs.StatusCode(err), errs.Cause(err).Error())
+		return err
+	}
+	return c.JSON(http.StatusOK, oCommunities)
+}
+
 // Create ...
 // @summary
 // @description
