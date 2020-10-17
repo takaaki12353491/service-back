@@ -7,5 +7,6 @@ type User struct {
 }
 
 type Login struct {
-	JWT string
+	JWT  string
+	User User
 }

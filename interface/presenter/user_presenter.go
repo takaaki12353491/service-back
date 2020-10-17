@@ -18,13 +18,19 @@ func NewUserPresenter() *UserPresenter {
 }
 
 func (p *UserPresenter) Login(user *model.User) *outputdata.Login {
-	jwtToken := jwt.New(jwt.SigningMethodHS256)
-	claims := jwtToken.Claims.(jwt.MapClaims)
-	claims["sub"] = user.ID
-	claims["exp"] = time.Now().AddDate(0, 0, 7).Unix()
-	claims["iat"] = time.Now().Unix()
-	t, _ := jwtToken.SignedString([]byte(os.Getenv(consts.SIGNIN_KEY)))
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"sub": user.ID,
+		"exp": time.Now().AddDate(0, 0, 7).Unix(),
+		"iat": time.Now().Unix(),
+	})
+	tokenString, _ := token.SignedString([]byte(os.Getenv(consts.SIGNIN_KEY)))
+	oUser := outputdata.User{
+		ID:    user.ID,
+		Name:  user.Name,
+		Email: user.Email,
+	}
 	return &outputdata.Login{
-		JWT: t,
+		JWT:  tokenString,
+		User: oUser,
 	}
 }
