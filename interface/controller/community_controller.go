@@ -33,6 +33,7 @@ func NewCommunityController() *CommunityController {
 // @tags Community
 // @accept mpfd
 // @produce json
+// @param Authorization header string true "jwt token"
 // @param name formData string true "name"
 // @param description formData string true "description"
 // @param password formData string true "password"

@@ -41,6 +41,13 @@ var doc = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "jwt token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "name",
                         "name": "name",
                         "in": "formData",

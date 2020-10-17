@@ -42,6 +42,11 @@ paths:
       consumes:
       - multipart/form-data
       parameters:
+      - description: jwt token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: name
         in: formData
         name: name
