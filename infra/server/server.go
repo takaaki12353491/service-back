@@ -37,6 +37,7 @@ func Start() {
 	eg.POST("/login", userController.Login, logout)
 
 	communities := e.EchoGroup("/communities")
+	communities.GET("", communityController.Index)
 	communities.POST("", communityController.Create, login)
 
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
