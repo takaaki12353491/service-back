@@ -38,6 +38,24 @@ info:
   version: "1.0"
 paths:
   /communities:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/outputdata.Community'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      tags:
+      - Community
     post:
       consumes:
       - multipart/form-data

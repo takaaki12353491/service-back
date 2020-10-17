@@ -13,8 +13,9 @@ import (
 func Start() {
 	// Echo instance
 	e := NewEcho()
+	api := e.EchoGroup("")
 	// Middleware
-	e.Use(
+	api.Use(
 		middleware.LoggerWithConfig(middleware.LoggerConfig{
 			Format: logFormat(),
 		}),
@@ -32,11 +33,10 @@ func Start() {
 	communityController := controller.NewCommunityController()
 
 	// routing
-	eg := e.EchoGroup("")
-	eg.POST("/signup", userController.Signup, logout)
-	eg.POST("/login", userController.Login, logout)
+	api.POST("/signup", userController.Signup, logout)
+	api.POST("/login", userController.Login, logout)
 
-	communities := e.EchoGroup("/communities")
+	communities := api.EchoGroup("/communities")
 	communities.GET("", communityController.Index)
 	communities.POST("", communityController.Create, login)
 
