@@ -9,17 +9,19 @@ import (
 
 type Community struct {
 	Model
-	Owner   User   `validate:"required"`
-	Name    string `validate:"required"`
-	Members []User
+	Owner       User   `validate:"required"`
+	Name        string `validate:"required"`
+	Description string
+	Members     []User
 }
 
-func NewCommunity(owner *User, name string) (*Community, error) {
+func NewCommunity(owner *User, name, description string) (*Community, error) {
 	id := uuid.New().String()
 	community := &Community{
-		Model: Model{ID: id},
-		Owner: *owner,
-		Name:  name,
+		Model:       Model{ID: id},
+		Owner:       *owner,
+		Name:        name,
+		Description: description,
 	}
 	err := validator.Validate(community)
 	if err != nil {

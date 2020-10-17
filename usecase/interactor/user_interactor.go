@@ -12,8 +12,8 @@ import (
 )
 
 type UserInteractor struct {
-	userRepository repository.UserRepository
 	outputport     outputport.UserOutputPort
+	userRepository repository.UserRepository
 }
 
 func NewUserInteractor(
