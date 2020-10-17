@@ -35,8 +35,7 @@ func NewCommunityController() *CommunityController {
 // @produce json
 // @param Authorization header string true "jwt token"
 // @param name formData string true "name"
-// @param description formData string true "description"
-// @param password formData string true "password"
+// @param description formData string false "description"
 // @success 200 {object} outputdata.Community ""
 // @failure 400 {string} string ""
 // @router /communities [post]
