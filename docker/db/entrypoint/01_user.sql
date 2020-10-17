@@ -1,8 +1,6 @@
-/* drop */
 DROP TABLE IF EXISTS `users`;
-/* create */
 CREATE TABLE `users` (
-  `id` VARCHAR(36) PRIMARY KEY,
+  `id` VARCHAR(36) NOT NULL PRIMARY KEY,
   `name` VARCHAR(16) UNIQUE NOT NULL,
   `email` VARCHAR(64) UNIQUE NOT NULL,
   `password_digest` VARCHAR(255) NOT NULL,
