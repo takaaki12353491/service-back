@@ -17,7 +17,8 @@ func NewCommunityDatabase() *CommunityDatabase {
 
 func (db *CommunityDatabase) FindAll() ([]model.Community, error) {
 	communities := []model.Community{}
-	err := db.Find(&communities).Error
+	tx := db.Set("gorm:auto_preload", true).Begin()
+	err := tx.Find(&communities).Commit().Error
 	if err != nil {
 		log.Error(err)
 		return nil, err
