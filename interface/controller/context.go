@@ -3,6 +3,7 @@ package controller
 import "context"
 
 type Context interface {
+	UserID() string
 	CTX() context.Context
 	String(code int, s string) error
 	JSON(code int, i interface{}) error

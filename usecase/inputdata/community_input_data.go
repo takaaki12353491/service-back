@@ -1,7 +1,7 @@
 package inputdata
 
 type Community struct {
-	UserID      string
-	Name        string
+	UserID      string `validate:"required"`
+	Name        string `validate:"required"`
 	Description string
 }

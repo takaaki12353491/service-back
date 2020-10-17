@@ -8,10 +8,11 @@ import (
 var pn = newParamName()
 
 type paramName struct {
-	Name     string
-	Email    string
-	Password string
-	Identity string
+	Name        string
+	Email       string
+	Password    string
+	Identity    string
+	Description string
 }
 
 func newParamName() *paramName {
