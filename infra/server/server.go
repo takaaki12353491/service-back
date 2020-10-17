@@ -29,10 +29,15 @@ func Start() {
 
 	// Controllers
 	userController := controller.NewUserController()
+	communityController := controller.NewCommunityController()
 
+	// routing
 	eg := e.EchoGroup("")
 	eg.POST("/signup", userController.Signup, logout)
 	eg.POST("/login", userController.Login, logout)
+
+	communities := e.EchoGroup("/communities")
+	communities.POST("", communityController.Create, login)
 
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 	// Start server
