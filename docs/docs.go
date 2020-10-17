@@ -119,6 +119,24 @@ var doc = `{
             "properties": {
                 "jwt": {
                     "type": "string"
+                },
+                "user": {
+                    "type": "object",
+                    "$ref": "#/definitions/outputdata.User"
+                }
+            }
+        },
+        "outputdata.User": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
                 }
             }
         }
