@@ -4,7 +4,7 @@ import (
 	"os"
 	"service-back/consts"
 	"service-back/domain/model"
-	outputdata "service-back/usecase/output/data"
+	"service-back/usecase/outputdata"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"

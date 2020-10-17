@@ -3,9 +3,9 @@ package interactor
 import (
 	"service-back/domain/model"
 	"service-back/errs"
-	inputdata "service-back/usecase/input/data"
-	outputdata "service-back/usecase/output/data"
-	outputport "service-back/usecase/output/port"
+	"service-back/usecase/inputdata"
+	"service-back/usecase/outputdata"
+	"service-back/usecase/outputport"
 	"service-back/usecase/repository"
 
 	log "github.com/sirupsen/logrus"

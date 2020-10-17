@@ -2,9 +2,9 @@ package interactor
 
 import (
 	"service-back/domain/model"
-	inputdata "service-back/usecase/input/data"
-	outputdata "service-back/usecase/output/data"
-	outputport "service-back/usecase/output/port"
+	"service-back/usecase/inputdata"
+	"service-back/usecase/outputdata"
+	"service-back/usecase/outputport"
 	"service-back/usecase/repository"
 
 	log "github.com/sirupsen/logrus"
@@ -16,8 +16,16 @@ type CommunityInteractor struct {
 	userRepository      repository.UserRepository
 }
 
-func NewCommunityInteractor() *CommunityInteractor {
-	return &CommunityInteractor{}
+func NewCommunityInteractor(
+	outputport outputport.CommunityOutputPort,
+	communityRepository repository.CommunityRepository,
+	userRepository repository.UserRepository,
+) *CommunityInteractor {
+	return &CommunityInteractor{
+		outputport:          outputport,
+		communityRepository: communityRepository,
+		userRepository:      userRepository,
+	}
 }
 
 func (it *CommunityInteractor) Create(iCommunity *inputdata.Community) (*outputdata.Community, error) {

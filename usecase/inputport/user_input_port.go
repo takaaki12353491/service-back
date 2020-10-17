@@ -1,8 +1,8 @@
 package inputport
 
 import (
-	inputdata "service-back/usecase/input/data"
-	outputdata "service-back/usecase/output/data"
+	"service-back/usecase/inputdata"
+	"service-back/usecase/outputdata"
 )
 
 type UserInputPort interface {

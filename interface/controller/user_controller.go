@@ -5,8 +5,8 @@ import (
 	"service-back/errs"
 	"service-back/interface/database"
 	"service-back/interface/presenter"
-	inputdata "service-back/usecase/input/data"
-	inputport "service-back/usecase/input/port"
+	"service-back/usecase/inputdata"
+	"service-back/usecase/inputport"
 	"service-back/usecase/interactor"
 	"service-back/validator"
 
