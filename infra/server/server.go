@@ -13,25 +13,29 @@ import (
 func Start() {
 	// Echo instance
 	e := NewEcho()
-	api := e.EchoGroup("")
+
 	// Middleware
-	api.Use(
+	e.Use(
 		middleware.LoggerWithConfig(middleware.LoggerConfig{
 			Format: logFormat(),
 		}),
-		middleware.BodyDump(func(c echo.Context, reqBody, resBody []byte) {
-			log.Printf("Request Body: %v\n", string(reqBody))
-			log.Printf("Response Body: %v\n", string(resBody))
-		}),
 		middleware.CORS(),
 		middleware.Recover(),
-		wrapContext,
 	)
 
 	// Controllers
 	userController := controller.NewUserController()
 	communityController := controller.NewCommunityController()
 
+	// api
+	api := e.EchoGroup("")
+	api.Use(
+		middleware.BodyDump(func(c echo.Context, reqBody, resBody []byte) {
+			log.Printf("Request Body: %v\n", string(reqBody))
+			log.Printf("Response Body: %v\n", string(resBody))
+		}),
+		wrapContext,
+	)
 	// routing
 	api.POST("/signup", userController.Signup, logout)
 	api.POST("/login", userController.Login, logout)
