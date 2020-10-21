@@ -11,7 +11,7 @@ func NewConnection() *gorm.DB {
 	DBMS := "mysql"
 	USER := os.Getenv("SERVICE_MYSQL_USER")
 	PASS := os.Getenv("SERVICE_MYSQL_PASSWORD")
-	PROTOCOL := "tcp(takaaki:3306)"
+	PROTOCOL := "tcp(localhost:3306)"
 	DBNAME := os.Getenv("SERVICE_MYSQL_DATABASE")
 	OPTION := "?parseTime=true&loc=Asia%2FTokyo"
 	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + OPTION
