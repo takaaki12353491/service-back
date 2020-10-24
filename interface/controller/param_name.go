@@ -8,6 +8,7 @@ import (
 var pn = newParamName()
 
 type paramName struct {
+	ID          string
 	Name        string
 	Email       string
 	Password    string

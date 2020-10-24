@@ -46,6 +46,27 @@ func (ctrl *CommunityController) Index(c Context) error {
 	return c.JSON(http.StatusOK, oCommunities)
 }
 
+// Show ...
+// @summary
+// @description
+// @tags Community
+// @accept json
+// @produce json
+// @param id path string true ""
+// @success 200 {object} outputdata.Community ""
+// @failure 400 {string} string ""
+// @router /communities/{id} [get]
+func (ctrl *CommunityController) Show(c Context) error {
+	id := c.Param(pn.ID)
+	oCommunity, err := ctrl.inputport.Show(id)
+	if err != nil {
+		log.Error(err)
+		c.JSON(errs.StatusCode(err), errs.Cause(err).Error())
+		return err
+	}
+	return c.JSON(http.StatusOK, oCommunity)
+}
+
 // Create ...
 // @summary
 // @description
@@ -55,8 +76,8 @@ func (ctrl *CommunityController) Index(c Context) error {
 // @param Authorization header string true "jwt token"
 // @param name formData string true "name"
 // @param description formData string false "description"
-// @success 200 {object} outputdata.Community ""
-// @failure 400 {string} string ""
+// @success 200
+// @failure 400
 // @router /communities [post]
 func (ctrl *CommunityController) Create(c Context) error {
 	userID := c.UserID()
