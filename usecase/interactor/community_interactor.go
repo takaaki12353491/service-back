@@ -37,6 +37,15 @@ func (it *CommunityInteractor) Index() ([]outputdata.Community, error) {
 	return it.outputport.Index(communities), nil
 }
 
+func (it *CommunityInteractor) Show(id string) (*outputdata.Community, error) {
+	community, err := it.communityRepository.FindByID(id)
+	if err != nil {
+		log.Error(err)
+		return nil, err
+	}
+	return it.outputport.Show(community), nil
+}
+
 func (it *CommunityInteractor) Create(iCommunity *inputdata.Community) (*outputdata.Community, error) {
 	user, err := it.userRepository.FindByID(iCommunity.UserID)
 	if err != nil {
