@@ -26,6 +26,17 @@ func (db *CommunityDatabase) FindAll() ([]model.Community, error) {
 	return communities, nil
 }
 
+func (db *CommunityDatabase) FindByID(id string) (*model.Community, error) {
+	community := new(model.Community)
+	community.ID = id
+	err := db.First(community).Error
+	if err != nil {
+		log.Error(err)
+		return nil, err
+	}
+	return community, nil
+}
+
 func (db *CommunityDatabase) Store(community *model.Community) error {
 	err := db.Create(community).Error
 	if err != nil {
