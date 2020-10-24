@@ -73,11 +73,11 @@ func (ctrl *CommunityController) Create(c Context) error {
 		c.JSON(errs.StatusCode(err), errs.Cause(err).Error())
 		return err
 	}
-	oCommunity, err := ctrl.inputport.Create(iCommunity)
+	err = ctrl.inputport.Create(iCommunity)
 	if err != nil {
 		log.Error(err)
 		c.JSON(errs.StatusCode(err), errs.Cause(err).Error())
 		return err
 	}
-	return c.JSON(http.StatusOK, oCommunity)
+	return c.JSON(http.StatusOK, nil)
 }

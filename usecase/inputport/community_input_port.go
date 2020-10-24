@@ -8,5 +8,5 @@ import (
 type CommunityInputPort interface {
 	Index() ([]outputdata.Community, error)
 	Show(string) (*outputdata.Community, error)
-	Create(*inputdata.Community) (*outputdata.Community, error)
+	Create(*inputdata.Community) error
 }

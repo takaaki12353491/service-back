@@ -21,7 +21,7 @@ func (p *CommunityPresenter) Index(cummunities []model.Community) []outputdata.C
 	return oCommunities
 }
 
-func (p *CommunityPresenter) Create(community *model.Community) *outputdata.Community {
+func (p *CommunityPresenter) Show(community *model.Community) *outputdata.Community {
 	return p.convert(community)
 }
 

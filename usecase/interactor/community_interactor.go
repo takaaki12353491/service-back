@@ -46,21 +46,21 @@ func (it *CommunityInteractor) Show(id string) (*outputdata.Community, error) {
 	return it.outputport.Show(community), nil
 }
 
-func (it *CommunityInteractor) Create(iCommunity *inputdata.Community) (*outputdata.Community, error) {
+func (it *CommunityInteractor) Create(iCommunity *inputdata.Community) error {
 	user, err := it.userRepository.FindByID(iCommunity.UserID)
 	if err != nil {
 		log.Error(err)
-		return nil, err
+		return err
 	}
 	community, err := model.NewCommunity(user, iCommunity.Name, iCommunity.Description)
 	if err != nil {
 		log.Error(err)
-		return nil, err
+		return err
 	}
 	err = it.communityRepository.Store(community)
 	if err != nil {
 		log.Error(err)
-		return nil, err
+		return err
 	}
-	return it.outputport.Create(community), nil
+	return nil
 }
