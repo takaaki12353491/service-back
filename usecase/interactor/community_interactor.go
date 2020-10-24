@@ -2,6 +2,7 @@ package interactor
 
 import (
 	"service-back/domain/model"
+	"service-back/errs"
 	"service-back/usecase/inputdata"
 	"service-back/usecase/outputdata"
 	"service-back/usecase/outputport"
@@ -63,4 +64,18 @@ func (it *CommunityInteractor) Create(iCommunity *inputdata.Community) error {
 		return err
 	}
 	return nil
+}
+
+func (it *CommunityInteractor) Edit(id string, userID string) (*outputdata.Community, error) {
+	community, err := it.communityRepository.FindByID(id)
+	if err != nil {
+		log.Error(err)
+		return nil, err
+	}
+	if community.OwnerID != userID {
+		errMsg := "The user can't get the brand"
+		log.Error(errMsg)
+		return nil, errs.Forbidden.New(errMsg)
+	}
+	return it.outputport.Edit(community), nil
 }
