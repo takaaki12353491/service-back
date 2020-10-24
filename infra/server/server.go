@@ -42,6 +42,7 @@ func Start() {
 
 	communities := api.EchoGroup("/communities")
 	communities.GET("", communityController.Index)
+	communities.GET("/:id", communityController.Show)
 	communities.POST("", communityController.Create, login)
 
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
