@@ -25,6 +25,10 @@ func (p *CommunityPresenter) Show(community *model.Community) *outputdata.Commun
 	return p.convert(community)
 }
 
+func (p *CommunityPresenter) Edit(community *model.Community) *outputdata.Community {
+	return p.convert(community)
+}
+
 func (p *CommunityPresenter) convert(community *model.Community) *outputdata.Community {
 	oOwner := &outputdata.User{
 		ID:    community.Owner.ID,
