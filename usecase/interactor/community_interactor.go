@@ -73,7 +73,7 @@ func (it *CommunityInteractor) Edit(id string, userID string) (*outputdata.Commu
 		return nil, err
 	}
 	if community.OwnerID != userID {
-		errMsg := "The user can't get the brand"
+		errMsg := "The user can't get the community"
 		log.Error(errMsg)
 		return nil, errs.Forbidden.New(errMsg)
 	}
