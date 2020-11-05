@@ -1,6 +1,7 @@
 package model
 
 import (
+	"mime/multipart"
 	"service-back/validator"
 
 	"github.com/google/uuid"
@@ -13,6 +14,10 @@ type Community struct {
 	Owner       User   `validate:"required"`
 	Name        string `validate:"required"`
 	Description string
+	LogoURL     string
+	Logo        *multipart.FileHeader
+	HeaderURL   string
+	Header      *multipart.FileHeader
 	Members     []User
 }
 
