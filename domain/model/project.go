@@ -8,6 +8,8 @@ type Project struct {
 	Model
 	CommunityID string
 	Community   Community
+	OwnerID     string
+	Owner       User
 	Name        string
 	Description string
 	LogoURL     string
