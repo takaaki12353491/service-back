@@ -79,3 +79,21 @@ func (it *CommunityInteractor) Edit(id string, userID string) (*outputdata.Commu
 	}
 	return it.outputport.Edit(community), nil
 }
+
+func (it *CommunityInteractor) Update(iUpdateCommunity *inputdata.UpdateCommunity) error {
+	community, err := it.communityRepository.FindByID(iUpdateCommunity.ID)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+	user, err := it.userRepository.FindByID(iUpdateCommunity.UserID)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+	if !community.IsOwner(user) {
+		return errs.Forbidden.New("The user can't update the community")
+	}
+	community.Update(iUpdateCommunity.Name, iUpdateCommunity.Description)
+	return nil
+}

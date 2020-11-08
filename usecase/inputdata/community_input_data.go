@@ -5,3 +5,8 @@ type Community struct {
 	Name        string `validate:"required"`
 	Description string
 }
+
+type UpdateCommunity struct {
+	ID string
+	Community
+}

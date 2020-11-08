@@ -41,6 +41,17 @@ func NewCommunity(owner *User, name, description string) (*Community, error) {
 	return community, nil
 }
 
+func (community *Community) Update(name, description string) error {
+	community.Name = name
+	community.Description = description
+	err := validator.Validate(community)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+	return nil
+}
+
 func (community *Community) NewProject(owner *User, name, description string) (*Project, error) {
 	if !community.IsMember(owner) {
 		return nil, errs.Forbidden.New("The user is not member")
