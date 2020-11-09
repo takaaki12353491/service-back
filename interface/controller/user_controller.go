@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 	"service-back/errs"
-	"service-back/interface/database"
+	"service-back/interface/datastore"
 	"service-back/interface/presenter"
 	"service-back/usecase/inputdata"
 	"service-back/usecase/inputport"
@@ -21,7 +21,7 @@ func NewUserController() *UserController {
 	return &UserController{
 		inputport: interactor.NewUserInteractor(
 			presenter.NewUserPresenter(),
-			database.NewUserDatabase(),
+			datastore.NewUserDatastore(),
 		),
 	}
 }

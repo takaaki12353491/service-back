@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 	"service-back/errs"
-	"service-back/interface/database"
+	"service-back/interface/datastore"
 	"service-back/interface/presenter"
 	"service-back/usecase/inputdata"
 	"service-back/usecase/inputport"
@@ -21,8 +21,8 @@ func NewCommunityController() *CommunityController {
 	return &CommunityController{
 		inputport: interactor.NewCommunityInteractor(
 			presenter.NewCommunityPresenter(),
-			database.NewCommunityDatabase(),
-			database.NewUserDatabase(),
+			datastore.NewCommunityDatastore(),
+			datastore.NewUserDatastore(),
 		),
 	}
 }

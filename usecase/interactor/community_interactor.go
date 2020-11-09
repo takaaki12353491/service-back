@@ -53,7 +53,7 @@ func (it *CommunityInteractor) Create(iCommunity *inputdata.Community) error {
 		log.Error(err)
 		return err
 	}
-	community, err := model.NewCommunity(user, iCommunity.Name, iCommunity.Description)
+	community, err := model.NewCommunity(user, iCommunity.Name, iCommunity.Description, iCommunity.Icon, iCommunity.Header)
 	if err != nil {
 		log.Error(err)
 		return err
@@ -94,6 +94,10 @@ func (it *CommunityInteractor) Update(iUpdateCommunity *inputdata.UpdateCommunit
 	if !community.IsOwner(user) {
 		return errs.Forbidden.New("The user can't update the community")
 	}
-	community.Update(iUpdateCommunity.Name, iUpdateCommunity.Description)
+	err = community.Update(iUpdateCommunity.Name, iUpdateCommunity.Description, iUpdateCommunity.Icon, iUpdateCommunity.Header)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
 	return nil
 }
