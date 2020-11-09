@@ -16,4 +16,4 @@ service-back
 # vendor/
 
 # local storage
-image
+image/
