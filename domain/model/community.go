@@ -15,23 +15,29 @@ type Community struct {
 	Owner       User   `validate:"required"`
 	Name        string `validate:"required"`
 	Description string
-	LogoURL     string
-	Logo        *multipart.FileHeader
-	HeaderURL   string
+	IconName    string
+	Icon        *multipart.FileHeader
+	HeaderName  string
 	Header      *multipart.FileHeader
 	Members     []User
 	Invitees    []User
 	Applicants  []User
 }
 
-func NewCommunity(owner *User, name, description string) (*Community, error) {
+func NewCommunity(owner *User, name, description string, icon, header *multipart.FileHeader) (*Community, error) {
 	id := uuid.New().String()
+	iconName := "icon_" + id
+	headerName := "header_" + id
 	community := &Community{
 		Model:       Model{ID: id},
 		OwnerID:     owner.ID,
 		Owner:       *owner,
 		Name:        name,
 		Description: description,
+		IconName:    iconName,
+		Icon:        icon,
+		HeaderName:  headerName,
+		Header:      header,
 	}
 	err := validator.Validate(community)
 	if err != nil {
@@ -41,9 +47,11 @@ func NewCommunity(owner *User, name, description string) (*Community, error) {
 	return community, nil
 }
 
-func (community *Community) Update(name, description string) error {
+func (community *Community) Update(name, description string, icon, header *multipart.FileHeader) error {
 	community.Name = name
 	community.Description = description
+	community.Icon = icon
+	community.Header = header
 	err := validator.Validate(community)
 	if err != nil {
 		log.Error(err)
