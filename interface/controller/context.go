@@ -1,6 +1,9 @@
 package controller
 
-import "context"
+import (
+	"context"
+	"mime/multipart"
+)
 
 type Context interface {
 	UserID() string
@@ -10,6 +13,7 @@ type Context interface {
 	Redirect(code int, url string) error
 	Bind(i interface{}) error
 	FormValue(name string) string
+	FormFile(name string) (*multipart.FileHeader, error)
 	QueryParam(name string) string
 	Param(name string) string
 }

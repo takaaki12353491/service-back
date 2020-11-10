@@ -76,6 +76,8 @@ func (ctrl *CommunityController) Show(c Context) error {
 // @param Authorization header string true "jwt token"
 // @param name formData string true "name"
 // @param description formData string false "description"
+// @param icon formData file false "icon"
+// @param header formData file false "header"
 // @success 200
 // @failure 400
 // @router /communities [post]
@@ -83,10 +85,14 @@ func (ctrl *CommunityController) Create(c Context) error {
 	userID := c.UserID()
 	name := c.FormValue(pn.Name)
 	description := c.FormValue(pn.Description)
+	icon, _ := c.FormFile(pn.Icon)
+	header, _ := c.FormFile(pn.Header)
 	iCommunity := &inputdata.Community{
 		UserID:      userID,
 		Name:        name,
 		Description: description,
+		Icon:        icon,
+		Header:      header,
 	}
 	err := validator.Validate(iCommunity)
 	if err != nil {

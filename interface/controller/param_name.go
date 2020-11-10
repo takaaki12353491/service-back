@@ -14,6 +14,8 @@ type paramName struct {
 	Password    string
 	Identity    string
 	Description string
+	Icon        string
+	Header      string
 }
 
 func newParamName() *paramName {
