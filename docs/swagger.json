@@ -70,6 +70,44 @@
                         "description": "description",
                         "name": "description",
                         "in": "formData"
+                    },
+                    {
+                        "type": "file",
+                        "description": "icon",
+                        "name": "icon",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "file",
+                        "description": "header",
+                        "name": "header",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {}
+                }
+            }
+        },
+        "/communities/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Community"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {

@@ -52,7 +52,7 @@ func (ctrl *CommunityController) Index(c Context) error {
 // @tags Community
 // @accept json
 // @produce json
-// @param id path string true ""
+// @param id path string true "id"
 // @success 200 {object} outputdata.Community ""
 // @failure 400 {string} string ""
 // @router /communities/{id} [get]

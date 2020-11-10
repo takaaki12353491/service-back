@@ -74,6 +74,31 @@ paths:
         in: formData
         name: description
         type: string
+      - description: icon
+        in: formData
+        name: icon
+        type: file
+      - description: header
+        in: formData
+        name: header
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200": {}
+        "400": {}
+      tags:
+      - Community
+  /communities/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
       produces:
       - application/json
       responses:
