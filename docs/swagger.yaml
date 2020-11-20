@@ -28,7 +28,7 @@ definitions:
       name:
         type: string
     type: object
-host: 192.168.50.10:8080
+host: localhost:8080
 info:
   contact: {}
   description: This is a personal project

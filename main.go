@@ -13,7 +13,7 @@ import (
 // @version 1.0
 // @description This is a personal project
 // @license.name takaaki12353491
-// @host 192.168.50.10:8080
+// @host localhost:8080
 // @BasePath
 func main() {
 	// time zone setting

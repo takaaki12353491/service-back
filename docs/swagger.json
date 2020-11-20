@@ -9,7 +9,7 @@
         },
         "version": "1.0"
     },
-    "host": "192.168.50.10:8080",
+    "host": "localhost:8080",
     "paths": {
         "/communities": {
             "get": {
