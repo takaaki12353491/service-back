@@ -1,5 +1,5 @@
 package server
 
-var (
+const (
 	userIDKey = "userIDKey"
 )

@@ -3,6 +3,9 @@ package datastore
 import (
 	"service-back/domain/model"
 	"service-back/interface/datastore/database"
+	"service-back/interface/datastore/storage"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type CommunityDatastore struct {
@@ -24,5 +27,12 @@ func (ds *CommunityDatastore) FindByID(id string) (*model.Community, error) {
 }
 
 func (ds *CommunityDatastore) Store(community *model.Community) error {
-	return ds.database.Store(community)
+	err := ds.database.Store(community)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+	storage.Upload(community.Header)
+	storage.Upload(community.Icon)
+	return nil
 }

@@ -2,8 +2,10 @@ package model
 
 import (
 	"mime/multipart"
+	"path/filepath"
 	"service-back/errs"
 	"service-back/validator"
+	"strings"
 
 	"github.com/google/uuid"
 	log "github.com/sirupsen/logrus"
@@ -26,8 +28,10 @@ type Community struct {
 
 func NewCommunity(owner *User, name, description string, icon, header *multipart.FileHeader) (*Community, error) {
 	id := uuid.New().String()
-	iconName := "icon_" + id
-	headerName := "header_" + id
+	iconExt := filepath.Ext(icon.Filename)
+	iconName := strings.Join([]string{"icon_", id, iconExt}, "")
+	headerExt := filepath.Ext(header.Filename)
+	headerName := strings.Join([]string{"header_", id, headerExt}, "")
 	community := &Community{
 		Model:       Model{ID: id},
 		OwnerID:     owner.ID,
